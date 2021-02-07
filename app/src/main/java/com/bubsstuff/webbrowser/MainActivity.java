@@ -34,6 +34,7 @@ public class MainActivity extends AppCompatActivity {
                 ViewGroup.LayoutParams.WRAP_CONTENT);
         searchBarParams.weight = 1;
         searchBar.setLayoutParams(searchBarParams);
+        searchBar.setText("https://google.com");
 
         AppCompatButton goButton = new AppCompatButton(this);
         LinearLayout.LayoutParams goButtonParams = new LinearLayout.LayoutParams(
