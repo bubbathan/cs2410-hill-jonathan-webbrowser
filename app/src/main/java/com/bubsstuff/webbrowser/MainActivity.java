@@ -17,6 +17,8 @@ public class MainActivity extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        HistoryList browserHistory = new HistoryList();
+
         LinearLayout mainLayout = new LinearLayout(this);
         mainLayout.setOrientation(LinearLayout.VERTICAL);
 
@@ -83,7 +85,19 @@ public class MainActivity extends AppCompatActivity {
         goButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                browserHistory.addSite(searchBar.getText().toString());
                 webSiteView.loadUrl(searchBar.getText().toString());
+
+            }
+        }
+        );
+
+        backButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                browserHistory.previousSite();
+                webSiteView.loadUrl(searchBar.getText().toString());
+
             }
         }
         );

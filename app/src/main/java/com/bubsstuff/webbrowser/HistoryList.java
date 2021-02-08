@@ -8,7 +8,30 @@ public class HistoryList {
         this.size = 0;
     }
 
-    public void newSite (String site) {
+    public void addSite (String site) {
+        ListNode<String> newSite = new ListNode<>(site);
+        ListNode<String> current = head.next;
+        ListNode<String> previous = head;
+
+        while (current != null) {
+            previous = current;
+            current = current.next;
+        }
+
+        previous.next = newSite;
+        newSite.next = null;
+        size++;
+    }
+
+    public void previousSite () { }
+
+    public void forwardSite () { }
+
+    public int getHistorySize () {
+        return size;
+    }
+
+    public String getSite (ListNode node) {
         
     }
 
