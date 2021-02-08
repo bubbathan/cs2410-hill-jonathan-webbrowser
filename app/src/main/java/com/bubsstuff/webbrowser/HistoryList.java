@@ -1,11 +1,12 @@
 package com.bubsstuff.webbrowser;
 
+import java.util.List;
+
 public class HistoryList {
     private ListNode<String> head = new ListNode<>();
     private int size;
 
     public HistoryList() {
-        this.size = 0;
     }
 
     public void addSite (String site) {
@@ -23,7 +24,18 @@ public class HistoryList {
         size++;
     }
 
-    public void previousSite () { }
+    public String previousSite (String site) {
+        ListNode<String> current = head.next;
+        ListNode<String> previous = head;
+
+        if(current.previous == null) return getSite(current);
+
+        while (site.compareTo(current.value.toString()) != 0) {
+            previous = current;
+            current = current.next;
+        }
+        return getSite(previous);
+    }
 
     public void forwardSite () { }
 
@@ -31,8 +43,8 @@ public class HistoryList {
         return size;
     }
 
-    public String getSite (ListNode node) {
-        
+    public String getSite (ListNode<String> node) {
+        return node.value.toString();
     }
 
     private class ListNode<String> {

@@ -95,7 +95,8 @@ public class MainActivity extends AppCompatActivity {
         backButton.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                browserHistory.previousSite();
+                String previousWebSite = browserHistory.previousSite(searchBar.getText().toString());
+                searchBar.setText(previousWebSite);
                 webSiteView.loadUrl(searchBar.getText().toString());
 
             }
