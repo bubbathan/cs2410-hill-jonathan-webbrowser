@@ -1,56 +1,49 @@
 package com.bubsstuff.webbrowser;
 
-import java.util.List;
-
 public class HistoryList {
     private ListNode<String> head = new ListNode<>();
-    private int size;
+    private ListNode<String> currentWebSite;
 
-    public HistoryList() {
+    public HistoryList(String currentSite) {
+        this.currentWebSite = new ListNode<>(currentSite);
+        this.head.nextSite = this.currentWebSite;
+        this.currentWebSite.previousSite = this.head;
+
     }
 
-    public void addSite (String site) {
-        ListNode<String> newSite = new ListNode<>(site);
-        ListNode<String> current = head.next;
-        ListNode<String> previous = head;
+    public void addSite (String newSite) {
+        ListNode<String> newWebSite = new ListNode<>(newSite);
 
-        while (current != null) {
-            previous = current;
-            current = current.next;
-        }
+        this.currentWebSite.nextSite = newWebSite;
+        newWebSite.nextSite = null;
+        newWebSite.previousSite = this.currentWebSite;
+        this.currentWebSite = newWebSite;
+    };
 
-        previous.next = newSite;
-        newSite.next = null;
-        size++;
+    public String previousSite () {
+
+        if(this.currentWebSite.previousSite == null) return getCurrentSite();
+        this.currentWebSite = currentWebSite.previousSite;
+        System.out.println();
+        return getCurrentSite();
     }
 
-    public String previousSite (String site) {
-        ListNode<String> current = head.next;
-        ListNode<String> previous = head;
+    public String forwardSite () {
+        if(this.currentWebSite.nextSite == null) return getCurrentSite();
+        this.currentWebSite = currentWebSite.nextSite;
 
-        if(current.previous == null) return getSite(current);
-
-        while (site.compareTo(current.value.toString()) != 0) {
-            previous = current;
-            current = current.next;
-        }
-        return getSite(previous);
-    }
-
-    public void forwardSite () { }
-
-    public int getHistorySize () {
-        return size;
+        return getCurrentSite();
     }
 
     public String getSite (ListNode<String> node) {
         return node.value.toString();
     }
+    public String getCurrentSite () {return currentWebSite.value.toString();}
 
     private class ListNode<String> {
         public String value;
-        public ListNode<String> next;
-        public ListNode<String> previous;
+        public ListNode<String> nextSite;
+        public ListNode<String> previousSite;
 
         public ListNode() { }
         public ListNode(String site) {
