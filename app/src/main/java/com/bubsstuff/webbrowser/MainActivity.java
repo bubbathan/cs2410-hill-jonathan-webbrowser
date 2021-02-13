@@ -23,13 +23,7 @@ public class MainActivity extends AppCompatActivity {
         mainLayout.setOrientation(LinearLayout.VERTICAL);
 
         // Create address bar layout
-        LinearLayout addressBar = new LinearLayout(this);
-        LinearLayout.LayoutParams addressBarParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        addressBarParams.setMargins(5,5,5,20);
-        addressBar.setLayoutParams(addressBarParams);
+        HorizontalLayout addressBar = new HorizontalLayout(this);
 
         // Create search field
         AppCompatEditText searchBar = new AppCompatEditText(this);
@@ -46,33 +40,15 @@ public class MainActivity extends AppCompatActivity {
         goButton.setText("Go");
 
         // Create layout for forward and back buttons
-        LinearLayout backForwardBar = new LinearLayout(this);
-        LinearLayout.LayoutParams backForwardBarParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.MATCH_PARENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        backForwardBarParams.setMargins(5,5,5,0);
-        backForwardBar.setLayoutParams(backForwardBarParams);
+        HorizontalLayout backForwardBar = new HorizontalLayout(this);
 
         // Create back button
-        AppCompatButton backButton = new AppCompatButton(this);
+        Button backButton = new Button(this);
         backButton.setText("<");
-        LinearLayout.LayoutParams backButtonParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        backButtonParams.weight = 1;
-        backButton.setLayoutParams(backButtonParams);
 
         // Create forward button
-        AppCompatButton forwardButton = new AppCompatButton(this);
+        Button forwardButton = new Button(this);
         forwardButton.setText(">");
-        LinearLayout.LayoutParams forwardButtonParams = new LinearLayout.LayoutParams(
-                ViewGroup.LayoutParams.WRAP_CONTENT,
-                ViewGroup.LayoutParams.WRAP_CONTENT
-        );
-        forwardButtonParams.weight = 1;
-        forwardButton.setLayoutParams(forwardButtonParams);
 
         // Create view for website
         WebView webSiteView = new WebView(this);
@@ -91,10 +67,8 @@ public class MainActivity extends AppCompatActivity {
             public void onClick(View view) {
                 browserHistory.addSite(searchBar.getText().toString());
                 webSiteView.loadUrl(searchBar.getText().toString());
-
             }
-        }
-        );
+        });
 
         // Back button functionality
         backButton.setOnClickListener(new View.OnClickListener() {
@@ -103,10 +77,8 @@ public class MainActivity extends AppCompatActivity {
                 String previousWebSite = browserHistory.previousSite();
                 searchBar.setText(previousWebSite);
                 webSiteView.loadUrl(searchBar.getText().toString());
-
             }
-        }
-        );
+        });
 
         // Forward button functionality\
         forwardButton.setOnClickListener(new View.OnClickListener() {
